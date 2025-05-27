@@ -18,8 +18,8 @@ import aiohttp
 import concurrent.futures
 from functools import lru_cache
 import time
-
-
+from dotenv import load_dotenv
+load_dotenv()
 # Configuration
 UPLOAD_FOLDER = 'uploads'
 PDF_TEMP_FOLDER = 'pdf_temp'
@@ -33,7 +33,7 @@ app.config['SECRET_KEY'] = 'your_very_secret_key_for_flask_session_and_flashes_v
 if not os.path.exists(UPLOAD_FOLDER): os.makedirs(UPLOAD_FOLDER)
 if not os.path.exists(PDF_TEMP_FOLDER): os.makedirs(PDF_TEMP_FOLDER)
 
-OPENROUTER_API_KEY = "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"
+OPENROUTER_API_KEY = os.getenv("aPI_KEY")
 OPENROUTER_MODELS_LIST = []
 # DEFAULT_OPENROUTER_MODELS will be a list now
 DEFAULT_OPENROUTER_MODELS = ["openai/gpt-3.5-turbo"]  # Default is a list
