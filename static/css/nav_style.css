@@ -1,0 +1,63 @@
+/* static/css/nav_style.css */
+
+.main-nav {
+    background-color: #333; /* Dark background for the navbar */
+    padding: 10px 0;
+    border-bottom: 2px solid #555;
+    width: 100%;
+    box-sizing: border-box; /* Ensures padding doesn't add to width */
+    position: fixed; /* Keep navbar at the top */
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+.nav-container {
+    max-width: 960px; /* Max width for navbar content */
+    margin: 0 auto;   /* Center navbar content */
+    padding: 0 20px;  /* Padding inside the container */
+    display: flex;
+    justify-content: space-between; /* Space brand and links */
+    align-items: center;
+}
+
+.nav-brand {
+    color: #e0e0e0; /* Light color for brand */
+    font-size: 1.5em;
+    font-weight: bold;
+    text-decoration: none;
+}
+.nav-brand:hover {
+    color: #fff;
+}
+
+.main-nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.main-nav ul li {
+    margin-left: 20px;
+}
+
+.main-nav ul li a {
+    color: #ccc; /* Lighter color for nav links */
+    text-decoration: none;
+    font-size: 1.1em;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.main-nav ul li a:hover,
+.main-nav ul li a.active { /* Style for active link */
+    color: #fff;
+    background-color: #555;
+}
+
+/* Adjust body padding to prevent content from being hidden by fixed navbar */
+body {
+    padding-top: 70px; /* Height of navbar + a little extra */
+}

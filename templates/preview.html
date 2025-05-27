@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>▶IPYNB</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/onedark.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{{ url_for('home') }}" class="nav-brand">IPYNB Converter</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="{{ url_for('home') }}" class="nav-link">Into PDF</a></li>
+                <li class="nav-item"><a href="#" class="nav-link active">Preview</a></li>
+                <li class="nav-item"><a href="{{ url_for('explain_code_page') }}" class="nav-link">Explain Code ✨</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-content">
+        <div class="container">
+            <h1>Notebook Preview for {{ original_filename if original_filename else "File" }}</h1>
+            <hr style="border-color: #3b4048; margin: 20px 0;">
+
+            {{ html_content | safe }}
+
+            {% if original_filename %}
+            <div class="download-pdf-container">
+                <a href="{{ url_for('download_pdf', original_filename=original_filename) }}" class="btn btn-download-pdf">
+                    Download as PDF
+                </a>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>▶IPYNB</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{{ url_for('home') }}" class="nav-brand">IPYNB Converter</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="{{ url_for('home') }}" class="nav-link active">Into PDF</a></li>
+                <li class="nav-item"><a href="{{ url_for('explain_code_page') }}" class="nav-link">Explain Code✨</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-content">
+        <div class="container">
+            <h1>IPYNB to PDF Converter</h1>
+            <p>Upload your Jupyter Notebook (<code>.ipynb</code>) file to convert it to PDF.</p>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                <div class="flashes">
+                {% for category, message in messages %}
+                  <div class="flash-message {{ category }}">{{ message }}</div>
+                {% endfor %}
+                </div>
+              {% endif %}
+            {% endwith %}
+
+            <form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data" class="upload-form">
+                <div class="file-input-wrapper">
+                    <label for="ipynb_file" class="file-input-label">Click or Drag to Select .ipynb File</label>
+                    <input type="file" name="ipynb_file" id="ipynb_file" accept=".ipynb" required>
+                    <span id="fileName">No file chosen</span>
+                </div>
+                <button type="submit" id="submitBtn" disabled>Convert & Preview</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('ipynb_file');
+        const fileNameDisplay = document.getElementById('fileName');
+        const submitBtn = document.getElementById('submitBtn');
+
+        fileInput.addEventListener('change', function() {
+            if (this.files.length > 0) {
+                fileNameDisplay.textContent = this.files[0].name;
+                submitBtn.disabled = false;
+            } else {
+                fileNameDisplay.textContent = 'No file chosen';
+                submitBtn.disabled = true;
+            }
+        });
+    </script>
+</body>
+</html>

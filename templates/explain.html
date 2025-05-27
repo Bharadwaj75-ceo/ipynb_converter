@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>▶IPYNB</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/onedark.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{{ url_for('home') }}" class="nav-brand">IPYNB Converter</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="{{ url_for('home') }}" class="nav-link">Into PDF</a></li>
+                <li class="nav-item"><a href="{{ url_for('explain_code_page') }}" class="nav-link active">Explain Code✨</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-content">
+        <div class="container">
+            <!-- Tab Bar -->
+            {% if selected_models_for_tabs and selected_models_for_tabs|length > 0 %}
+            <div class="explanation-tabs">
+                {% for model_tab in selected_models_for_tabs %}
+                    <button class="tab-button {% if loop.first %}active{% endif %}"
+                            onclick="showTab('{{ model_tab.id | e }}', this)">
+                        {{ model_tab.name | truncate(25, True) }}  {# Truncate long model names for tabs #}
+                    </button>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="explanation-header-info">
+                <h1>AI Code Explanations for: {{ filename if filename else "Notebook" }}</h1>
+                {% if selected_models_for_tabs %}
+                    <p class="explanation-models-used-info">
+                        Viewing explanations. Use tabs above to switch between models.
+                        <br>Models used:
+                        <strong>
+                            {{ selected_models_for_tabs | map(attribute='name') | map('truncate', 30, True) | join(', ') }}
+                        </strong>
+                    </p>
+                {% endif %}
+                <p><a href="{{ url_for('explain_code_page') }}">← Explain Another File or Change Models</a></p>
+            </div>
+            <hr class="content-separator-hr">
+
+            {% if processed_cells %}
+                {% for cell_data in processed_cells %}
+                    <div class="explained-code-block multi-explanation-block">
+                        <div class="code-cell-for-explanation">
+                            {{ cell_data.code_html | safe }}
+                        </div>
+
+                        <div class="explanations-content-area"> {# Wrapper for all model explanations for THIS cell #}
+                            {% if cell_data.explanations_by_model %}
+                                {% for explanation_item in cell_data.explanations_by_model %}
+                                <div class="explanation-tab-panel model-specific-explanation"
+                                     data-model-id="{{ explanation_item.model_id | e }}"
+                                     style="display: none;"> {# Initially hide all panels; JS will show the active one #}
+                                    <h3>
+                                        <i class="fas fa-brain"></i> Explanation from:
+                                        <span class="explanation-model-name">{{ explanation_item.model_name | truncate(40, True) }}</span>
+                                    </h3>
+                                    {{ explanation_item.explanation_html | safe }}
+                                </div>
+                                {% endfor %}
+                            {% else %}
+                                <div class="explanation-text no-explanation-for-cell"><p><em>No explanations generated for this specific code cell by any selected model.</em></p></div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No code cells with content were found to explain, or an error occurred.</p>
+            {% endif %}
+        </div>
+    </div>
+
+<script>
+    function showTab(modelIdToShow, clickedButton) {
+        // Update active state for tab buttons
+        const tabButtons = document.querySelectorAll('.explanation-tabs .tab-button');
+        tabButtons.forEach(button => {
+            button.classList.remove('active');
+        });
+        if (clickedButton) { // Can be null if called programmatically without a button context
+            clickedButton.classList.add('active');
+        }
+
+        // Show/hide explanation panels across ALL code cells
+        const allExplanationBlocks = document.querySelectorAll('.multi-explanation-block');
+        allExplanationBlocks.forEach(block => {
+            const tabPanels = block.querySelectorAll('.explanation-tab-panel');
+            let explanationFoundForModelInThisBlock = false;
+            tabPanels.forEach(panel => {
+                if (panel.getAttribute('data-model-id') === modelIdToShow) {
+                    panel.style.display = 'block';
+                    explanationFoundForModelInThisBlock = true;
+                } else {
+                    panel.style.display = 'none';
+                }
+            });
+
+            // Optional: If the selected model has no explanation for THIS specific code cell,
+            // you could show a placeholder or the first available one.
+            // For now, it will just show nothing for that cell under that tab if no specific explanation exists.
+            const noExplanationPlaceholder = block.querySelector('.no-explanation-for-cell-placeholder');
+            if (noExplanationPlaceholder) noExplanationPlaceholder.remove(); // Remove old placeholder
+
+            if (!explanationFoundForModelInThisBlock && block.querySelector('.explanations-content-area')) {
+                 // If you want a placeholder when a specific model has no explanation for a cell:
+                // const placeholder = document.createElement('div');
+                // placeholder.className = 'explanation-text no-explanation-for-cell-placeholder';
+                // placeholder.innerHTML = `<p><em>No explanation available from this model for this specific code cell.</em></p>`;
+                // block.querySelector('.explanations-content-area').appendChild(placeholder);
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const firstActiveTabButton = document.querySelector('.explanation-tabs .tab-button.active');
+        if (firstActiveTabButton) {
+            // Extract modelId from the first active tab's onclick attribute (or a data-attribute)
+            // Example assuming onclick="showTab('model-id-string', this)"
+            const onclickAttr = firstActiveTabButton.getAttribute('onclick');
+            const match = onclickAttr.match(/showTab\('([^']+)'/);
+            if (match && match[1]) {
+                const firstModelId = match[1];
+                showTab(firstModelId, firstActiveTabButton); // Initialize view for the first active tab
+            }
+        } else {
+            // If no tabs (e.g., single model or error), this block won't run, which is fine.
+            // Or, if there are tab panels but no tab buttons (should not happen with current logic),
+            // you might want to display the first panel of the first model as a fallback.
+            const firstPanel = document.querySelector('.explanation-tab-panel');
+            if (firstPanel) {
+                firstPanel.style.display = 'block';
+            }
+        }
+    });
+</script>
+</body>
+</html>

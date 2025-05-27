@@ -1,0 +1,194 @@
+/* static/css/style.css - OneDark Theme for Forms & Modals */
+
+/* --- General Body & Page Structure --- */
+html {
+    height: 100%; /* Ensure html element takes full height */
+    background-color: #282c34; /* OneDark: Main background - APPLY TO HTML AS WELL */
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    margin: 0;
+    padding: 0;
+    background-color: #282c34; /* OneDark: Main background - REDUNDANT BUT SAFE */
+    color: #abb2bf;            /* OneDark: Default text */
+    text-align: left;
+    line-height: 1.6;
+    min-height: 100%; /* Ensure body also tries to take full height */
+    display: flex; /* Use flexbox to make .page-content grow if needed */
+    flex-direction: column;
+}
+
+/* --- Navbar (Consistent with onedark.css navbar) --- */
+.navbar {
+    background-color: #21252b; /* OneDark: Darker panel background */
+    padding: 10px 0;
+    border-bottom: 1px solid #3b4048; /* OneDark: Subtle border */
+    width: 100%;
+    box-sizing: border-box;
+    position: fixed; /* Or 'sticky' if you prefer it to scroll with page initially */
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+/* ... (rest of navbar styles - assume they are correct from previous version) ... */
+.nav-container { max-width: 960px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+.nav-brand { font-size: 1.5em; font-weight: bold; color: #61afef; text-decoration: none; transition: color 0.3s ease; }
+.nav-brand:hover { color: #c678dd; }
+.nav-menu { list-style: none; padding: 0; margin: 0; display: flex; }
+.nav-item { margin-left: 20px; }
+.nav-link { text-decoration: none; color: #abb2bf; font-weight: 500; padding: 8px 12px; border-radius: 4px; transition: color 0.3s ease, background-color 0.3s ease; }
+.nav-link:hover { color: #61afef; background-color: #2c313a; }
+.nav-link.active { color: #98c379; background-color: #2c313a; font-weight: bold; }
+
+
+/* --- Page Content & Main Container for Forms --- */
+.page-content {
+    padding-top: 70px; /* Initial space for fixed navbar - adjust if navbar height changes */
+    padding-bottom: 40px;
+    flex-grow: 1; /* Allow .page-content to grow and fill available space */
+    width: 100%; /* Ensure it spans the full width */
+    box-sizing: border-box;
+    display: flex; /* To center the .container within it */
+    flex-direction: column;
+    align-items: center; /* Center .container horizontally */
+}
+.page-content .container { /* This is the main box holding the form */
+    background-color: #21252b; /* OneDark: Panel background */
+    padding: 30px 40px;
+    border-radius: 8px;
+    border: 1px solid #3b4048;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+    width: 100%;
+    max-width: 650px; /* Max width for form container */
+    margin-top: 30px; /* Space from navbar or top of page-content */
+    margin-bottom: 30px; /* Space at the bottom */
+    box-sizing: border-box;
+}
+/* ... (Rest of .page-content .container h1, p, code styles - assume correct) ... */
+.page-content .container h1 { color: #61afef; margin-top: 0; margin-bottom: 20px; font-size: 1.8em; border-bottom: 1px solid #3b4048; padding-bottom: 10px; }
+.page-content .container p { color: #9da5b4; margin-bottom: 25px; font-size: 1em; }
+.page-content .container p code { background-color: #2c313a; color: #d19a66; padding: 0.2em 0.4em; border-radius: 3px; font-size: 0.9em; }
+
+
+/* --- Form Styling (file input, buttons - assume correct from previous version) --- */
+.upload-form { /* Class on the <form> element */ }
+.file-input-wrapper { position: relative; overflow: hidden; display: block; margin-bottom: 25px; border: 2px dashed #5c6370; background-color: #2c313a; padding: 30px 20px; border-radius: 6px; cursor: pointer; text-align: center; transition: border-color 0.3s ease, background-color 0.3s ease; }
+.file-input-wrapper:hover { border-color: #61afef; background-color: #313640; }
+.file-input-wrapper input[type="file"] { font-size: 100px; position: absolute; left: 0; top: 0; opacity: 0; cursor: pointer; height: 100%; width: 100%; }
+.file-input-label { color: #61afef; font-weight: bold; font-size: 1.1em; }
+#fileName { display: block; margin-top: 10px; font-style: italic; color: #9da5b4; font-size: 0.9em; }
+button[type="submit"] { background-color: #61afef; color: #ffffff; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em; font-weight: 500; transition: background-color 0.3s ease, transform 0.1s ease; width: 100%; box-sizing: border-box; }
+button[type="submit"]:hover { background-color: #5298d3; }
+button[type="submit"]:active { transform: translateY(1px); }
+button[type="submit"]:disabled { background-color: #3b4048; color: #5c6370; cursor: not-allowed; }
+
+/* --- Flash Messages (assume correct from previous version) --- */
+.flashes { list-style: none; padding: 0; margin: 0 0 20px 0; }
+.flash-message { padding: 12px 18px; margin-bottom: 15px; border-radius: 5px; border: 1px solid transparent; font-weight: 500; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+.flash-message.error, .flash-message.danger { background-color: #3e2324; color: #e06c75; border-color: #e06c75; }
+.flash-message.success { background-color: #2a3f2c; color: #98c379; border-color: #98c379; }
+.flash-message.info { background-color: #2c313a; color: #61afef; border-color: #61afef; }
+.flash-message.warning { background-color: #4a3c29; color: #e5c07b; border-color: #e5c07b; }
+
+/* --- Model Selection Panel (explain_upload_form.html - assume correct) --- */
+.ai-model-selection-panel { background-color: #2c313a; border: 1px solid #3b4048; border-radius: 6px; padding: 20px; margin-bottom: 25px; }
+.ai-model-selection-panel .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #3b4048; }
+.ai-model-selection-panel .panel-header h4 { margin: 0; font-size: 1.15em; color: #abb2bf; font-weight: 500; }
+.btn-manage-models { background-color: #61afef; color: #ffffff; padding: 8px 15px; border: none; border-radius: 5px; cursor: pointer; font-size: 0.9em; transition: background-color 0.2s ease; display: inline-flex; align-items: center; }
+.btn-manage-models:hover { background-color: #5298d3; }
+.btn-manage-models i { margin-right: 6px; }
+.selected-models-tags { display: flex; flex-wrap: wrap; gap: 8px; min-height: 30px; align-items: center; }
+.model-tag { background-color: #3b4048; color: #abb2bf; padding: 6px 12px; border-radius: 15px; font-size: 0.85em; display: inline-flex; align-items: center; white-space: nowrap; }
+.model-tag span { margin-right: 8px; max-width: 150px; overflow: hidden; text-overflow: ellipsis;}
+.remove-tag-btn { background: none; border: none; color: #9da5b4; font-size: 1.1em; cursor: pointer; padding: 0 0 0 4px; line-height: 1; font-weight: bold; }
+.remove-tag-btn:hover { color: #e06c75; }
+.no-models-selected-text { font-style: italic; color: #9da5b4; font-size: 0.9em; padding: 5px 0; }
+
+/* --- Modal Styles (OneDark Themed - assume correct) --- */
+.modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(20, 22, 27, 0.85); }
+.modal-content.large { background-color: #21252b; color: #abb2bf; margin: 5% auto; padding: 25px 30px; border: 1px solid #3b4048; width: 90%; max-width: 700px; border-radius: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.3); position: relative; }
+.modal-content h2 { margin-top: 0; color: #61afef; border-bottom: 1px solid #3b4048; padding-bottom: 15px; font-size: 1.5em; font-weight: 500; }
+.modal-content p { font-size: 0.95em; color: #9da5b4; margin-bottom: 15px; }
+.close-button { color: #9da5b4; position: absolute; top: 15px; right: 20px; font-size: 30px; font-weight: bold; line-height: 1; }
+.close-button:hover, .close-button:focus { color: #e06c75; text-decoration: none; cursor: pointer; }
+.modal-search-bar input[type="text"] { width: 100%; padding: 12px 15px; background-color: #2c313a; color: #abb2bf; border: 1px solid #4b5263; border-radius: 6px; font-size: 1em; box-sizing: border-box; margin-bottom: 20px; }
+.modal-search-bar input[type="text"]::placeholder { color: #5c6370; }
+.modal-search-bar input[type="text"]:focus { border-color: #61afef; box-shadow: 0 0 0 0.2rem rgba(97,175,239,.25); outline: none; }
+.model-list-container.checkboxes { max-height: 40vh; overflow-y: auto; border: 1px solid #3b4048; border-radius: 6px; background-color: #282c34; }
+.model-item-checkbox { display: flex; align-items: center; padding: 12px 15px; border-bottom: 1px solid #3b4048; position: relative; transition: background-color 0.15s ease; }
+.model-item-checkbox:hover { background-color: #2c313a; }
+.model-item-checkbox:last-child { border-bottom: none; }
+.model-item-checkbox input[type="checkbox"] { margin-right: 15px; transform: scale(1.3); cursor: pointer; accent-color: #61afef; }
+.model-item-checkbox label { display: flex; align-items: center; cursor: pointer; flex-grow: 1; font-size: 0.95em; }
+.provider-logo-small { width: 22px; height: 22px; margin-right: 10px; object-fit: contain; border-radius: 4px; background-color: rgba(255,255,255,0.1); }
+.model-item-checkbox .model-name { font-weight: 500; color: #abb2bf; }
+.model-item-checkbox .model-tooltip { visibility: hidden; width: 320px; background-color: #1c1e22; color: #abb2bf; text-align: left; border-radius: 6px; padding: 12px 15px; position: absolute; z-index: 10002; top: 50%; transform: translateY(-50%); left: calc(100% + 10px); opacity: 0; transition: opacity 0.3s, visibility 0s linear 0.3s; font-size: 0.85em; line-height: 1.5; box-shadow: 0 3px 12px rgba(0,0,0,0.3); border: 1px solid #3b4048; }
+.model-item-checkbox .model-tooltip::after { content: ""; position: absolute; top: 50%; right: 100%; margin-top: -5px; border-width: 5px; border-style: solid; border-color: transparent #1c1e22 transparent transparent; }
+.model-item-checkbox:hover .model-tooltip { visibility: visible; opacity: 1; transition-delay: 0.3s; }
+.model-tooltip strong { color: #61afef; }
+.model-tooltip hr { border: 0; border-top: 1px solid #4b5263; margin: 8px 0; }
+.model-tooltip .model-description-tooltip { font-style: italic; color: #9da5b4; max-height: 70px; overflow-y: auto; }
+.modal-actions { text-align: right; margin-top: 25px; padding-top: 20px; border-top: 1px solid #3b4048; }
+.btn-apply-models { background-color: #98c379; color: #21252b; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-size: 1em; font-weight: 500; transition: background-color 0.2s ease; }
+.btn-apply-models:hover { background-color: #89b46c; }
+.no-models-message { padding: 20px; text-align: center; color: #9da5b4; font-size: 0.95em; }
+.model-list-container.checkboxes {
+    /* Existing styles: */
+    max-height: 40vh;
+    overflow-y: auto; /* Shows scrollbar only when needed */
+    border: 1px solid #3b4048;
+    border-radius: 6px;
+    background-color: #282c34;
+
+    /* Scrollbar Styling for WebKit/Blink (Chrome, Edge, Safari, Opera) */
+    scrollbar-width: thin;          /* For Firefox: 'auto', 'thin', 'none' */
+    scrollbar-color: #5c6370 #282c34; /* For Firefox: thumb-color track-color */
+}
+
+/* WebKit/Blink Scrollbar Parts for .model-list-container.checkboxes */
+.model-list-container.checkboxes::-webkit-scrollbar {
+    width: 8px; /* Width of the vertical scrollbar */
+    height: 8px; /* Height of the horizontal scrollbar (if it were to appear) */
+}
+
+.model-list-container.checkboxes::-webkit-scrollbar-track {
+    background: #282c34; /* Background of the track (same as list bg) */
+    border-radius: 10px; /* Rounded track */
+}
+
+.model-list-container.checkboxes::-webkit-scrollbar-thumb {
+    background-color: #5c6370; /* OneDark: Muted scrollbar thumb color */
+    border-radius: 10px;       /* Rounded thumb */
+    border: 2px solid #282c34; /* Creates a "padding" effect around thumb */
+}
+
+.model-list-container.checkboxes::-webkit-scrollbar-thumb:hover {
+    background-color: #61afef; /* OneDark: Blue on hover for thumb */
+}
+
+/* Generic Horizontal Scrollbar Styling (if any element needs it) */
+/* This will apply to any element with overflow-x: auto/scroll */
+/* that doesn't have more specific scrollbar styles */
+*::-webkit-scrollbar:horizontal { /* Target only horizontal scrollbars more broadly */
+    height: 10px; /* Height of the horizontal scrollbar */
+}
+*::-webkit-scrollbar-track:horizontal {
+    background: #21252b; /* Darker track for general horizontal */
+    border-radius: 10px;
+}
+*::-webkit-scrollbar-thumb:horizontal {
+    background-color: #61afef; /* OneDark: Blue for horizontal thumb */
+    border-radius: 10px;
+    border: 2px solid #21252b;
+}
+*::-webkit-scrollbar-thumb:horizontal:hover {
+    background-color: #98c379; /* OneDark: Green on hover for horizontal thumb */
+}
+/* --- Loading Overlay (assume correct) --- */
+#loadingOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(28, 30, 35, 0.92); color: #abb2bf; display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; text-align: center; }
+.loading-spinner { border: 8px solid #3b4048; border-top: 8px solid #61afef; border-radius: 50%; width: 60px; height: 60px; animation: spin 1s linear infinite; margin-bottom: 20px; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+.loading-text { font-size: 1.5em; margin-bottom: 10px; }
+.loading-subtext { font-size: 0.9em; color: #9da5b4; }
+
