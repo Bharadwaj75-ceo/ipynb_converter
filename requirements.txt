@@ -1,0 +1,8 @@
+Flask
+python-dotenv
+aiohttp
+requests
+nbformat
+nbconvert
+playwright
+markdown2
