@@ -1,139 +1,134 @@
-▶ IPYNB Tools
+📓 IPYNB Tools
+<div align="center">
+[Show Image](https://img.shields.io/badge/python-v3.8+-blue.svg)
+[Show Image](https://img.shields.io/badge/flask-web%20framework-green.svg)
+[Show Image](https://img.shields.io/badge/license-MIT-blue.svg)
+A powerful suite of web-based tools for working with Jupyter Notebooks
+Features • Installation • Usage • Tech Stack • Contributing
+</div>
 
-This project provides a suite of web-based tools for working with Jupyter Notebooks (.ipynb files). It allows users to convert notebooks to PDF and to get AI-powered explanations of code cells. The application is built with Flask and utilizes the OpenRouter API for generating code explanations from various large language models.
+🌟 Overview
+IPYNB Tools is a comprehensive web application that transforms how you work with Jupyter Notebooks. Whether you need to convert notebooks to beautiful PDFs or get AI-powered explanations of your code, this tool has you covered.
+✨ Features
+📄 PDF Conversion
 
-Features
+Transform .ipynb files into stunning, pageless PDF documents
+Beautifully styled with the One Dark theme for enhanced readability
+Maintains code formatting and output visualization
 
-PDF Conversion: Upload an .ipynb file and receive a pageless PDF document, styled with a "One Dark" theme for readability.
+🤖 AI Code Explanation
 
-AI Code Explanation:
+Get intelligent explanations of your code cells powered by multiple AI models
+Side-by-side view of original code and AI-generated explanations
+Support for various LLMs through the OpenRouter API
+Tabbed interface for easy comparison between different model explanations
 
-Upload an .ipynb file and have the code cells explained by your choice of AI models.
+🔐 Secure API Management
 
-Side-by-side view of code and its corresponding explanation.
+Safe, session-based storage of your OpenRouter API key
+No client-side exposure of sensitive credentials
+Easy key management through the web interface
 
-Support for multiple AI models via the OpenRouter API.
+🎨 Interactive UI
 
-Tabbed interface to easily switch between explanations from different models.
+Intuitive file upload with drag-and-drop support
+Model selection modal for customizing your AI experience
+Real-time loading indicators and progress feedback
+Responsive design that works on all devices
 
-Secure API Key Management: Your OpenRouter API key is stored securely in your session and is not exposed on the client-side.
 
-Interactive UI: A user-friendly interface with a file upload manager, model selection modal, and loading indicators for a smooth experience.
+🛠 Technology Stack
+ComponentTechnologyBackendShow Image PythonFrontendShow Image Show Image Show ImageConversionnbconvert, playwrightAI Integrationrequests, aiohttp (async API calls)StylingCustom "One Dark" theme
 
-Technology Stack
-
-Backend: Flask, Python
-
-Frontend: HTML, CSS, JavaScript
-
-Notebook Conversion: nbconvert, playwright
-
-AI Integration: requests, aiohttp (for asynchronous API calls to OpenRouter)
-
-Styling: A custom "One Dark" theme for both the web interface and the PDF output.
-
-Setup and Installation
+🚀 Installation
 Prerequisites
 
-Python 3.8+
+Python 3.8+ installed on your system
+pip package manager
+An OpenRouter API key (for AI explanations)
 
-pip for package management
+Quick Setup
 
-Installation
+Clone the repository
+bashgit clone <repository-url>
+cd ipynb-tools
 
-Clone the repository:
+Create and activate virtual environment
+bashpython -m venv venv
 
-Generated bash
-git clone <repository-url>
-cd <repository-directory>
+# On macOS/Linux
+source venv/bin/activate
+
+# On Windows
+venv\Scripts\activate
+
+Install dependencies
+bashpip install -r requirements.txt
+
+Install Playwright browsers
+bashplaywright install
 
 
-Create a virtual environment:
+🔑 API Configuration
 
-Generated bash
-python -m venv venv
-source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-Bash
-IGNORE_WHEN_COPYING_END
+Sign up for an OpenRouter account
+Obtain your API key from the dashboard
+Enter your key directly in the web interface when using AI features
 
-Install the required packages:
 
-Generated bash
-pip install -r requirements.txt
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-Bash
-IGNORE_WHEN_COPYING_END
+📖 Usage
+Starting the Application
+bashpython app.py
+Then navigate to http://127.0.0.1:5000 in your browser.
+📄 Converting Notebooks to PDF
 
-(Note: A requirements.txt file would need to be generated from the project's dependencies for this step to work.)
+Click "Into PDF" in the navigation bar
+Upload your .ipynb file using the drag-and-drop area
+Click "Convert & Preview" to see the HTML preview
+Download your beautifully formatted PDF
 
-Install Playwright browsers:
+🤖 Getting AI Code Explanations
 
-Generated bash
-playwright install
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-Bash
-IGNORE_WHEN_COPYING_END
-Configuration
+Navigate to "Explain Code"
+Enter and save your OpenRouter API key
+Select your preferred AI models using "Add / Manage Models"
+Upload your .ipynb file
+Click "Explain Code" and wait for the magic ✨
+Browse through explanations using the tabbed interface
 
-The application requires an API key from OpenRouter to use the code explanation feature.
 
-Sign up for an OpenRouter account and obtain your API key.
+🎯 Key Benefits
 
-The application allows you to enter and save your API key directly in the web interface. This key is stored in your session for the duration of your visit.
+Time-saving: Convert and analyze notebooks with just a few clicks
+Multi-model insights: Compare explanations from different AI models
+Professional output: Generate publication-ready PDFs
+Secure: Your API keys and data stay protected
+User-friendly: Intuitive interface suitable for all skill levels
 
-Usage
 
-Run the Flask application:
+🤝 Contributing
+We welcome contributions! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+Development Setup
 
-Generated bash
-python app.py
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-Bash
-IGNORE_WHEN_COPYING_END
+Fork the repository
+Create a feature branch (git checkout -b feature/AmazingFeature)
+Commit your changes (git commit -m 'Add some AmazingFeature')
+Push to the branch (git push origin feature/AmazingFeature)
+Open a Pull Request
 
-Open your web browser and navigate to http://127.0.0.1:5000.
 
-Converting a Notebook to PDF
+📄 License
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-On the homepage, click on the "Into PDF" link in the navigation bar.
+🙏 Acknowledgments
 
-Click the "Click or Drag to Select .ipynb File" area to choose your Jupyter Notebook.
+OpenRouter for providing access to multiple AI models
+Jupyter Project for the amazing notebook format
+Flask community for the robust web framework
+All contributors who help make this project better
 
-After selecting a file, the "Convert & Preview" button will become active. Click it.
 
-You will be taken to a preview page showing your notebook rendered in HTML.
-
-Click the "Download as PDF" button to save the PDF version of your notebook.
-
-Explaining Code in a Notebook
-
-Navigate to the "Explain Code" page using the link in the navigation bar.
-
-First, you must enter your OpenRouter API key in the designated input field and click "Save Key." This is a required step to fetch the available AI models.
-
-Once the key is saved, you can manage the AI models you want to use for explanations. Click on "Add / Manage Models" to open a modal where you can select from a list of available models.
-
-After selecting your desired models, upload your .ipynb file.
-
-Click the "Explain Code" button. The application will process your notebook, sending each code cell to the selected AI models for an explanation.
-
-The results page will display your notebook's code cells, each followed by the AI-generated explanations. If you selected multiple models, you can switch between their explanations using the tabs at the top of the page.
-
-Google Search Suggestions
-Display of Search Suggestions is required when using Grounding with Google Search. Learn more
-how to write a good readme for a web app
-readme.md template for flask project
-best readme examples github
+<div align="center">
+Made with ❤️ for the data science community
+⭐ Star this repo if you find it helpful! ⭐
+</div>Chat controls Sonnet 4
